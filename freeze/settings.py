@@ -15,11 +15,11 @@ if not os.path.isabs(FREEZE_ROOT):
 if settings.MEDIA_ROOT.find(FREEZE_ROOT) == 0 or settings.STATIC_ROOT.find(FREEZE_ROOT) == 0:
     raise ImproperlyConfigured('settings.FREEZE_ROOT cannot be a subdirectory of MEDIA_ROOT or STATIC_ROOT')
 
-FREEZE_MEDIA_ROOT = settings.MEDIA_ROOT
-FREEZE_MEDIA_URL = settings.MEDIA_URL
+FREEZE_MEDIA_ROOT = getattr(settings, 'FREEZE_MEDIA_ROOT', settings.MEDIA_ROOT)
+FREEZE_MEDIA_URL = getattr(settings, 'FREEZE_MEDIA_URL', settings.MEDIA_URL)
 
-FREEZE_STATIC_ROOT = settings.STATIC_ROOT
-FREEZE_STATIC_URL = settings.STATIC_URL
+FREEZE_STATIC_ROOT = getattr(settings, 'FREEZE_STATIC_ROOT', settings.STATIC_ROOT)
+FREEZE_STATIC_URL = getattr(settings, 'FREEZE_STATIC_URL', settings.STATIC_URL)
 
 FREEZE_USE_HTTPS = getattr(settings, 'FREEZE_USE_HTTPS', False)
 FREEZE_SITE = Site.objects.get_current()
